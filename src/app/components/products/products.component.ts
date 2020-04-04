@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from "@angular/common";
 import { productInterface } from 'src/app/models/product';
 import { DataProductService } from 'src/app/services/data-product.service';
 
@@ -16,12 +17,15 @@ export class ProductsComponent implements OnInit {
   public products: any = {};
 
   async ngOnInit() {
-    this.getListProducts();
+    await this.getListProducts().then(response => {
+      this.products = Object.values(response.data);
+      console.log('data:',this.products);
+    });;
   }
 
   async getListProducts() {
-    this.products = await this.productService.getAllProducts();
-    console.log('products:', this.products);
+    return await this.productService.getAllProducts();
+    
   }
 
 }

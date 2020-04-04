@@ -1,7 +1,8 @@
 <p>products works!</p>
 <div>
-    <!-- <div *ngFor="let product of products">
+    <div *ngFor="let product of products ; index as i">
         <div>{{product.name}}</div>
         <div>{{product.partNumber}}</div>
-    </div>  -->
+        <div><img src={{product.locals.fullImage}}/></div>
+    </div> 
 </div>

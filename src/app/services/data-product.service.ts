@@ -9,12 +9,9 @@ import axios from 'axios';
 export class DataProductService {
 
   constructor() { }
-  public items: Observable<productInterface[]>;
+  public products: Observable<productInterface[]>;
 
   async getAllProducts(){
-    await axios.get('http://localhost:4600/products/').then((response) => {
-      console.log('retorna', response);
-      return response;
-    });
+    return await axios.get('http://localhost:4600/products/');
   }
 }
