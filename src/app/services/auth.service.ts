@@ -8,12 +8,12 @@ import { UserInterface } from 'src/app/Models/user';
 import { DataReturn } from './../models/dataReturn';
 import axios from 'axios';
 import { from } from 'rxjs';
+import LABELS from './../../assets/labels.json';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  public LABELS: any;
   constructor(
     private afsAuth: AngularFireAuth,
     private router: Router,
@@ -40,7 +40,16 @@ export class AuthService {
       email: email,
       password: password
     }).then(resp => {
-      console.log('registerUser:',resp);
+      console.log('Auth.service OK:',resp)
+      return resp;
+    }).catch((error: any) => {
+      const data : DataReturn = {
+        code: 503,
+        message: LABELS.Error.Network_Error,
+        data: error
+      }
+      console.log('Auth service don\'t conection with backend service', data)
+      throw data;
     });
   }
   
@@ -54,10 +63,10 @@ export class AuthService {
     }).catch((error: any) => {
       const data : DataReturn = {
         code: 503,
-        message: error.message,
+        message: LABELS.Error.Network_Error,
         data: error
-    }
-    console.log('Auth service', data)
+      }
+      console.log('Auth service don\'t conection with backend service', data)
       throw data;
     });
   }

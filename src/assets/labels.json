@@ -5,6 +5,12 @@
             "lowercase": "the password must contain minimum a lowercase letter"
         }
     },
+    "routes_messages": {
+        "register": {
+            "success_register" : "you had a successful registration ... do you want to login?",
+            "button_redirect_login": "Do you have account?"
+        }
+    },
     "Error": {
         "Network_Error": "Servicio con proveedor caido. Por favor intente mas tarde." 
     }

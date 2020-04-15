@@ -5,7 +5,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import{ finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import { GlobalConstants } from '../../../globalConstants';
-
+import LABELS from './../../../../assets/labels.json';
 
 @Component({
   selector: 'app-register',
@@ -16,13 +16,16 @@ export class RegisterComponent implements OnInit {
   
   constructor(
     private AuthService:AuthService,
-    private Router: Router,
+    private router: Router,
     private storage:AngularFireStorage,
     private globalConstants: GlobalConstants
   ) { }
 
   public email: string = '';
   public password: string = '';
+  public login : any = {};
+  public user: any;
+  private successMessage: string = '';
   
   ngOnInit(): void {
     
@@ -32,16 +35,23 @@ export class RegisterComponent implements OnInit {
     console.log($event.target.value);
   }
 
-  onAddUser(){
-    this.AuthService.registerUser(this.email,this.password)
+  async onAddUser(){
+    await this.AuthService.registerUser(this.email,this.password)
     .then( (res) => {
-      console.log('AUTH_RES:', res)
-      this.AuthService.isAuth().subscribe(user => {
-        if(user){
-          console.log('CurrentlyUser:',user);
-        }
-      });
+      if (res.data){
+        this.login = res.data
+      }
+      console.log('login after save data', res.data)
+      if(res.data && res.data.code === 200 && res.data.data && res.data.data.user){    
+        this.successMessage = LABELS.routes_messages.register.success_register;    
+        // this.user = res.data.data.user;
+        // console.log('CurrentlyUser:',this.login);
+        // this.router.navigate(['login']);
+      }
       //this.Router.navigate(['item/itemList']);
-    }).catch( (err) => console.log('Error register/onAddUser:',err.message));
+    }).catch( (err) => {
+      console.log('Error register/onAddUser:',err.data)
+      this.login = err;
+    });
   }
 }
