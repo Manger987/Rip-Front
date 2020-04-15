@@ -15,6 +15,12 @@ import { ProductsComponent } from './components/products/products.component';
 import { Page404Component } from './components/page404/page404.component';
 import { LoginComponent } from './Components/user/login/login.component';
 import { RegisterComponent } from './Components/user/register/register.component';
+import { LogoutComponent } from './Components/user/logout/logout.component';
+import { ProductsModule } from './Components/products/products.module';
+import { StorageService } from './services/storage.service';
+import { HttpClientModule } from '@angular/common/http';
+import { GlobalConstants } from './globalConstants';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,20 +28,26 @@ import { RegisterComponent } from './Components/user/register/register.component
     ProductsComponent,
     Page404Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    // NgbModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    ProductsModule,
+    HttpClientModule
   ],
   providers: [
     AngularFireAuth,
-    AngularFirestore
+    AngularFirestore,
+    StorageService,
+    GlobalConstants
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { productInterface } from 'src/app/models/product';
 import { Observable } from 'rxjs';
 import axios from 'axios';
+import { ProductInterface } from './../models/product'; 
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,11 @@ import axios from 'axios';
 export class DataProductService {
 
   constructor() { }
-  public products: Observable<productInterface[]>;
+  public products: Observable<ProductInterface[]>;
 
-  async getAllProducts(){
-    return await axios.get('http://localhost:4600/products/');
+  public getAllProducts(): any {//Observable<ProductInterface[]> {
+    return axios.get('http://localhost:4600/products/').then((data: any) => {
+      return data;
+    })
   }
 }

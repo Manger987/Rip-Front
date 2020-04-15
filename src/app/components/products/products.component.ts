@@ -1,31 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from "@angular/common";
-import { productInterface } from 'src/app/models/product';
+import { ProductInterface } from 'src/app/models/product';
 import { DataProductService } from 'src/app/services/data-product.service';
+import { Observable } from 'rxjs';
+
+// import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  // template: '<app-logout></app-logout>',
+  styleUrls: ['./products.component.css'],
+  // providers: [NgbCarouselConfig]
 })
 export class ProductsComponent implements OnInit {
-
+  public products: any = [];
+  
   constructor(
     public productService: DataProductService,
-  ) { }
-
-  public products: any = {};
-
-  async ngOnInit() {
-    await this.getListProducts().then(response => {
-      this.products = Object.values(response.data);
-      console.log('data:',this.products);
-    });;
+    // config: NgbCarouselConfig
+  ) { 
+    // customize default values of carousels used by this component tree
+    // config.interval = 10000;
+    // config.wrap = false;
+    // config.keyboard = false;
+    // config.pauseOnHover = false;
   }
 
-  async getListProducts() {
-    return await this.productService.getAllProducts();
-    
+  async ngOnInit() {
+    this.products = await this.getListProducts();
+  }
+
+  getListProducts(): Observable<ProductInterface[]> {
+    return this.productService.getAllProducts().then(response => {
+      return response.data;
+    });
   }
 
 }

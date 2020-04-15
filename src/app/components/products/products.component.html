@@ -1,8 +1,44 @@
-<p>products works!</p>
 <div>
-    <div *ngFor="let product of products ; index as i">
-        <div>{{product.name}}</div>
-        <div>{{product.partNumber}}</div>
-        <div><img src={{product.locals.fullImage}}/></div>
-    </div> 
+    <p>products List</p>
+    <!-- <app-logout></app-logout> -->
+    <div class="container">
+        <div class="row"><!-- justify-content-md-center"> -->
+            <div class="col-md-4" *ngFor="let product of products">
+
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+                    <!-- <div class="carousel-item active" *ngFor="let image of product.images"> -->
+                      <img class="d-block w-100" style="width: auto; height: auto;" src="{{product.fullImage}}" alt="First slide">
+                    <!-- </div> -->
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+
+                  <!-- <ngb-carousel *ngIf="product.images">
+                    <ng-template ngbSlide *ngFor="let image of product.images">
+                      <div class="picsum-img-wrapper">
+                        <img [src]="image" alt="Random first slide">
+                      </div>
+                      <div class="carousel-caption">
+                        <h3>10 seconds between slides...</h3>
+                        <p>This carousel uses customized default values.</p>
+                      </div>
+                    </ng-template>
+                </ngb-carousel>     -->
+
+
+                <!-- <div><img class="img-thumbnail" style="width: 200; height: 200;" src={{product.fullImage}}/></div> -->
+                <div class="catalog-product-name-container">
+                  <span>{{product.name}}</span></div>
+                <div class="catalog-product-details__name">{{product.partNumber}}</div>
+            </div>
+        </div>
+    </div>
 </div>
