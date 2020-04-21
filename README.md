@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.
 
+Little project executed with rip-back project like Back
+
+Front: 
+https://github.com/Manger987/Rip-Front.git
+Forma de levantar.
+1.- Se debe clonar el repositorio Git del proyecto,  
+2.- abrir otra consola para levantar front del repo. ejecutando un npm install y luego npm start.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4400/`. The app will automatically reload if you change any of the source files.
