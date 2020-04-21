@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
   public password: string = '';
   public login : any = {};
   public user: any;
-  private successMessage: string = '';
+  public successMessage: string = '';
   
   ngOnInit(): void {
     
